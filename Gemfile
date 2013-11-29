@@ -4,7 +4,7 @@ gem 'rails', '3.2.15'
 
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
-gem 'rspec'
+gem 'rspec-rails'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
