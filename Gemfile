@@ -6,6 +6,10 @@ gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
 gem 'rspec-rails'
 
+
+
+gem 'pry', :group => [:development, :test]
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
