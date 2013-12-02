@@ -81,11 +81,16 @@ describe 'ActiveRecord::Base' do
       execute_plain("NULL").should ==  nil
     end
 
-    # This is different from how it worked in PHP, but it seems sane and
-    # is consistent with the MS-SQL documentation:
+    # This is OK according to the default behavior:
     # http://msdn.microsoft.com/en-us/library/hh231515.aspx
     it "should return just the string when concatenating any string with NULL" do
-      execute_plain("CONCAT('1', NULL)").should == "1" 
+      execute_plain("CONCAT('1', NULL)").should == "1"
+    end
+
+    it "should return Ruby nil for a concatenation of NULL with the string '1'" do
+      ActiveRecord::Base.connection.execute("SET concat_null_yields_null on;")
+      binding.pry
+      execute_plain("CONCAT('1', NULL)").should == nil
     end
 
     it "should return a string when concatenating a number (as string) with a space" do
@@ -101,10 +106,12 @@ describe 'ActiveRecord::Base' do
     end
 
     it "should not choke on 1 MB of text" do
+      ActiveRecord::Base.connection.execute("SET textsize 10000000")
       execute_plain("REPLICATE(CAST('1234567890' AS varchar(max)), 1000000)").length.should == 10000000
     end
 
     it "should not choke on 4 MB of text" do
+      ActiveRecord::Base.connection.execute("SET textsize 40000000")
       execute_plain("REPLICATE(CAST('1234567890' AS varchar(max)), 4000000)").length.should == 40000000
     end
   end
