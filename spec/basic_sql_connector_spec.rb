@@ -83,14 +83,12 @@ describe 'ActiveRecord::Base' do
 
     # This is OK according to the default behavior:
     # http://msdn.microsoft.com/en-us/library/hh231515.aspx
-    it "should return just the string when concatenating any string with NULL" do
+    it "should return just the string when using CONCAT() on any string with NULL" do
       execute_plain("CONCAT('1', NULL)").should == "1"
     end
 
-    it "should return Ruby nil for a concatenation of NULL with the string '1'" do
-      ActiveRecord::Base.connection.execute("SET concat_null_yields_null on;")
-      binding.pry
-      execute_plain("CONCAT('1', NULL)").should == nil
+    it "should return Ruby nil for a implicit concatenation of NULL with the string '1'" do
+      execute_plain("'1' + NULL").should == nil
     end
 
     it "should return a string when concatenating a number (as string) with a space" do
