@@ -1,4 +1,8 @@
 Madras::Application.routes.draw do
+
+  match '/people/:id', to: 'people#show'
+  match '/people/', to: 'people#index'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

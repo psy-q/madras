@@ -15,14 +15,14 @@ class PeopleController < ApplicationController
 
     if (myKey.length > 0)
 
-      tableFields = Madrasfield.joins(:madrasapplications, :madrasroutes)
+      tableFields = Madras::MadrasField.joins(:madrasapplications, :madrasroutes)
         .where('[tblCst_ZHdK_Madras2_Application].[Key] = ?', myKey)
         .where('? LIKE [tblCst_ZHdK_Madras2_route].[RoutePattern]', myRoute)
 
       if tableFields.count > 0
 
         selectProjection = tableFields.map { |e| e.Name }.join(",")
-        personRecords = Person.select(selectProjection).find(myId)
+        personRecords = Evento::Person.select(selectProjection).find(myId)
 
 
         respond_to do |format|

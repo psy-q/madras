@@ -1,6 +1,6 @@
-class Madrasapplication < ActiveRecord::Base
+class Madras::MadrasApplication < ActiveRecord::Base
 
-  has_many :madraspermissions, :primary_key => 'Id', :foreign_key => 'ApplicationId', :class_name => 'Madraspermission'
+  has_many :madraspermissions, :primary_key => 'Id', :foreign_key => 'ApplicationId', :class_name => 'MadrasPermission'
   has_many :madraspermissiontypes, :through => :madraspermissions
   has_many :madrasfields, :through => :madraspermissions
   has_many :madrasmodels, :through => :madrasfields

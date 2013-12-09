@@ -1,6 +1,6 @@
-class Madrasroute < ActiveRecord::Base
+class Madras::MadrasRoute < ActiveRecord::Base
 
-  has_many :madrasroutemodels, :foreign_key => 'RouteId', :primary_key => 'Id', :class_name => 'Madrasroutemodel'
+  has_many :madrasroutemodels, :foreign_key => 'RouteId', :primary_key => 'Id', :class_name => 'MadrasRoutemodel'
   
   has_many :madrasmodels, :through => :madrasroutemodels
   has_many :madrasfields, :through => :madrasmodels
