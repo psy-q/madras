@@ -1,35 +1,52 @@
+require 'security.rb'
+
+
 class PeopleController < ApplicationController
 
-
+  before_filter { |c| c.checkApiKey params[:apikey] }
   respond_to :xml, :json
 
-  def index
-    puts "gotta list something"
+
+  def initialize
   end
 
 
+  # Security checks : right verb, correct URI, correct parameters
+  def securityChecks
+  end
+
+
+
+
+  def index
+    logger.debug "gotta list something"
+  end
+
+
+
+
   def show
-    myKey = params[:apikey]
-    myId = params[:id]
-    myRoute = request.path
+    apiKey = params[:apikey]
+    userId = params[:id]
+    requestedRoute = request.path
 
-    if (myKey.length > 0)
-
-      tableFields = Madras::MadrasField.joins(:madrasapplications, :madrasroutes)
-        .where('[tblCst_ZHdK_Madras2_Application].[Key] = ?', myKey)
-        .where('? LIKE [tblCst_ZHdK_Madras2_route].[RoutePattern]', myRoute)
-
-      if tableFields.count > 0
-
-        selectProjection = tableFields.map { |e| e.Name }.join(",")
-        personRecords = Evento::Person.select(selectProjection).find(myId)
-
-
-        respond_to do |format|
-          format.xml { render :xml => personRecords.to_xml }
-          format.json { render :json => personRecords.to_json }
-        end
+    tableFields = Madras::MadrasField.joins(:madrasapplications, :madrasroutes)
+      .where('[tblCst_ZHdK_Madras2_Application].[Key] = ?', apiKey)
+      .where('? LIKE [tblCst_ZHdK_Madras2_route].[RoutePattern]', requestedRoute)
+  
+    if tableFields.count > 0
+      selectProjection = tableFields.map { |e| e.Name }.join(",")
+  
+      begin
+        personRecords = Evento::Person.select(selectProjection).find(userId)
+        respond_with personRecords
+      rescue ActiveRecord::RecordNotFound
+        render status: 404, text: 'record was not found'
+      rescue
+        render status: 400, text: 'bad request'
       end
+    else
+      render status: 401, text: 'unauthorized2'
     end
   end
 

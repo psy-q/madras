@@ -17,6 +17,7 @@ module Madras
 
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
+    config.autoload_paths += %W(#{config.root}/app/lib)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -58,5 +59,11 @@ module Madras
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+
+    # logging level
+    # :debug/0, :info/1, :warn/2, :error/3, :fatal/4, :unknown/5
+    config.log_level = :debug
+
   end
 end
