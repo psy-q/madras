@@ -6,7 +6,7 @@ class Madras::MadrasApplication < ActiveRecord::Base
   has_many :madrasmodels, :through => :madrasfields
   has_many :madrasroutes, :through => :madrasmodels
 
-  self.table_name = 'tblCst_ZHdK_Madras2_Application'
+  self.table_name = 'MadrasApplication'
   self.primary_key = 'Id'
 
 end

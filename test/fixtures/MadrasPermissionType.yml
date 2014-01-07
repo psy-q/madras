@@ -1,0 +1,12 @@
+permc:
+  Name: Create
+
+permr:
+  Name: Read
+
+permu:
+  Name: Update
+
+permd:
+  Name: Delete
+

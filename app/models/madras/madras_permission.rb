@@ -8,7 +8,7 @@ class Madras::MadrasPermission < ActiveRecord::Base
   has_many :madrasfields, :through => :madrasfieldpermissions
 
 
-  self.table_name = 'tblCst_ZHdK_Madras2_Permission'
+  self.table_name = 'MadrasPermission'
   self.primary_key = 'Id'
 
 end

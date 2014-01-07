@@ -1,0 +1,7 @@
+perm0:
+###  ApplicationId: app0
+##  :madrasapplication: app0
+#  :madrasapplication: app0
+  madrasapplication: app0
+  PermissionTypeId: 2
+#  FieldPermissionId: 2

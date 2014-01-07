@@ -1,0 +1,2 @@
+route0:
+  RoutePattern: /api/v1/people/%

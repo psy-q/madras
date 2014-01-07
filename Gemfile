@@ -5,6 +5,12 @@ gem 'rails', '3.2.15'
 gem 'activerecord-sqlserver-adapter'
 gem 'tiny_tds'
 gem 'rspec-rails'
+gem 'factory_girl_rails', :group => :test
+gem 'factory_girl', :group => :test
+
+gem 'mysql2', '~> 0.3.14'
+gem 'database_cleaner', '~> 1.2.0'
+gem 'seed_dump', '~> 3.0.0'
 
 
 

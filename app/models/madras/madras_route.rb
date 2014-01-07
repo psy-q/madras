@@ -8,7 +8,7 @@ class Madras::MadrasRoute < ActiveRecord::Base
   has_many :madraspermissiontypes, :through => :madraspermissions
   has_many :madrasapplications, :through => :madraspermissions
 
-  self.table_name = 'tblCst_ZHdK_Madras2_Route'
+  self.table_name = 'MadrasRoute'
   self.primary_key = 'Id'
 
 end

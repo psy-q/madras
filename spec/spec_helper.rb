@@ -35,4 +35,32 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+
+
+  config.before(:suite) do
+#    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  # we want to reset everything before testing
+  config.before :all do
+    EventoDb.seed
+#    DatabaseCleaner.clean_with :truncation
+  end
+
+  # we have to clean everything after testing
+  config.after :all do
+#    DatabaseCleaner.clean_with :truncation
+  end
+
+  config.before :each do
+#    DatabaseCleaner.start
+#    EventoDb.seed
+  end
+
+  config.after :each do
+#    DatabaseCleaner.clean
+  end
+
+
+  config.formatter = :documentation
 end
